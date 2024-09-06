@@ -65,3 +65,85 @@ app.listen(3000);
 //Куки — это небольшие данные, хранящиеся в браузере. Они имеют ограниченный размер, время жизни, и доступны по определенному домену и пути. Куки могут быть защищены флагами HttpOnly и Secure, и автоматически отправляются серверу с каждым запросом.
 
 
+
+
+2.   //useContext — это один из встроенных хуков, который позволяет компонентам подписываться на контекст и получать доступ к данным контекста. Используется для передачи данных через дерево компонентов без необходимости передавать пропсы на каждом уровне. Это особенно полезно для глобальных данных, таких как текущий авторизованный пользователь, тема (светлая/темная) или настройки локализации.
+
+//Создание контекста:
+
+//Для создания контекста используется функция createContext. Она возвращает объект контекста, который содержит два компонента: Provider и Consumer.
+
+/*import React, { createContext, useState } from 'react';
+
+const MyContext = createContext();*/
+
+//Provider
+
+//Компонент Provider используется для предоставления значения контекста всем дочерним компонентам. Все компоненты внутри Provider могут получить доступ к значениям, переданным в value.
+
+
+/*const MyProvider = ({ children }) => {
+    const [state, setState] = useState('Hello World');
+
+    return (
+      <MyContext.Provider value={{ state, setState }}>
+        {children}
+      </MyContext.Provider>
+    );
+  };*/
+  
+//useContext
+
+//Используется для подписки на контекст в функциональных компонентах. Он принимает объект контекста, возвращаемый из createContext, и возвращает текущее значение контекста
+
+/*import React, { useContext } from 'react';
+
+const MyComponent = () => {
+  const { state, setState } = useContext(MyContext);
+
+  return (
+    <div>
+      <p>{state}</p>
+      <button onClick={() => setState('New Value')}>Change Value</button>
+    </div>
+  );
+};*/
+
+import React, { createContext, useState, useContext } from 'react';
+
+// Создание контекста
+const MyContext = createContext();
+
+const MyProvider = ({ children }) => {
+  const [state, setState] = useState('Hello World');
+
+  return (
+    <MyContext.Provider value={{ state, setState }}>
+      {children}
+    </MyContext.Provider>
+  );
+};
+
+const MyComponent = () => {
+  const { state, setState } = useContext(MyContext);
+
+  return (
+    <div>
+      <p>{state}</p>
+      <button onClick={() => setState('New Value')}>Change Value</button>
+    </div>
+  );
+};
+
+const App = () => (
+  <MyProvider>
+    <MyComponent />
+  </MyProvider>
+);
+
+export default App;
+
+//useContext — это хук, который позволяет компонентам получать данные из контекста. Он используется для доступа к глобальным данным без необходимости передавать пропсы на каждом уровне компонента.
+
+
+
