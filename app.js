@@ -224,4 +224,72 @@ export default App;
 //Методология БЭМ упрощает чтение, поддержку и масштабирование кода за счет четкой структуры, изоляции компонентов и унификации стилей. Она делает интерфейсы более предсказуемыми и удобными для работы в команде.
 
 
+5.  //Всплытие (или бабблинг, event bubbling) — это механизм обработки событий в веб-разработке, при котором событие, происходящее на одном элементе, сначала обрабатывается этим элементом, а затем последовательно передаётся (всплывает) вверх по дереву DOM к его родительским элементам вплоть до корневого элемента (обычно document).
+
+
+//Как работает всплытие событий
+
+//Когда это происходит на элементе, сначала выполняются обработчики, прикрепленные к самому элементу, затем к его родителю, потом к родителю родителя, и так далее до document.
+
+/*<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Bubbling</title>
+</head>
+<body>
+  <div id="parent" style="padding: 20px; background-color: lightblue;">
+    Parent
+    <div id="child" style="padding: 20px; background-color: lightcoral;">
+      Child
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('parent').addEventListener('click', () => {
+      alert('Parent clicked!');
+    });
+
+    document.getElementById('child').addEventListener('click', () => {
+      alert('Child clicked!');
+    });
+  </script>
+</body>
+</html>*/
+
+
+//Управление всплытием
+
+//Иногда нужно предотвратить всплытие события, чтобы оно не передавалось родительским элементам. Это можно сделать с помощью метода event.stopPropagation().
+
+/*<script>
+  document.getElementById('parent').addEventListener('click', () => {
+    alert('Parent clicked!');
+  });
+
+  document.getElementById('child').addEventListener('click', (event) => {
+    alert('Child clicked!');
+    event.stopPropagation(); // предотвращает всплытие события
+  });
+</script>*/
+
+//Захват событий
+
+//Помимо всплытия, существует другой этап обработки событий, называемый захватом (event capturing). Событие сначала идет сверху вниз от корневого элемента к цели (начиная с document и заканчивая целевым элементом), а затем поднимается обратно вверх (всплытие).
+
+//Чтобы добавить обработчик на этапе захвата, нужно передать true в качестве третьего аргумента в addEventListener:
+
+/*<script>
+  document.getElementById('parent').addEventListener('click', () => {
+    alert('Parent clicked!');
+  }, true);
+
+  document.getElementById('child').addEventListener('click', () => {
+    alert('Child clicked!');
+  }, true);
+</script>*/
+
+
+
 
