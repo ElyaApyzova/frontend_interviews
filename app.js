@@ -1060,3 +1060,49 @@ document.querySelector('.parent').addEventListener('click', function() {
 //event.stopPropagation()
 //✅Останавливает дальнейшее распространение события по дереву DOM.
 //✅Примеры: остановка всплытия события от дочернего элемента к родительскому.
+
+
+14. //Оптимизация перерисовок (или "repaints" и "reflows") в веб-приложениях является важной задачей для обеспечения высокой производительности и плавности интерфейса. Вот несколько методов и стратегий, которые можно использовать для оптимизации перерисовок:
+
+
+//1️⃣Минимизация количества изменений в DOM
+
+//✅Используйте Document Fragments:
+//Вместо многократного добавления элементов в DOM, добавляйте их в DocumentFragment, а затем добавьте фрагмент в DOM одним действием.
+
+
+const fragment = document.createDocumentFragment();
+for (let i = 0; i < 100; i++) {
+  const div = document.createElement('div');
+  div.textContent = `Item ${i}`;
+  fragment.appendChild(div);
+}
+document.body.appendChild(fragment);
+
+
+//✅Batch DOM updates:
+
+//Группируйте несколько изменений DOM в одно действие. Это уменьшает количество вызовов для перерисовки.
+
+
+//2️⃣Избегайте синхронных изменений стилей и компоновки
+
+//✅CSS класс:
+//Вместо изменения нескольких отдельных стилей, измените один класс.
+
+element.style.width = '100px';
+element.style.height = '100px';
+element.style.backgroundColor = 'red';
+
+
+//Вместо этого используйте класс:
+
+/*
+
+.new-style {
+width: 100px;
+height: 100px;
+background-color: red;
+}
+
+*/
