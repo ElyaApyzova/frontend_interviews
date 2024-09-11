@@ -1289,3 +1289,80 @@ greet('Алиса'); // Привет, Алиса
 
 //"Falsy" значения — это значения, которые приводятся к false в логическом контексте. Основные "falsy" значения: false, 0, -0, "", null, undefined, NaN. Эти значения часто используются в условиях для проверки их истинности или ложности.
       
+
+16. //Promise.all — это метод, который позволяет обрабатывать несколько промисов одновременно и возвращает один промис, который завершится, когда все переданные промисы будут выполнены (или когда один из них будет отклонен).
+
+
+//Основные особенности:
+
+//1️⃣Параллельное выполнение промисов:
+//Promise.all принимает массив промисов и выполняет их параллельно. Он завершится успешно, когда все промисы в массиве будут выполнены.
+
+//2️⃣Возвращает один промис:
+//Метод возвращает один промис, который:
+//✅Выполняется с массивом результатов, если все промисы в массиве были успешно выполнены.
+//✅Отклоняется с причиной отклонения первого промиса, который был отклонен.
+
+//3️⃣Отклонение при первой ошибке:
+//Если один из промисов в массиве отклоняется, Promise.all сразу отклоняет весь промис, не дожидаясь выполнения остальных.
+
+
+//Синтаксис
+Promise.all(iterable);
+
+//✅iterable: Массив или другой итерируемый объект, элементы которого являются промисами или значениями.
+
+//Рассмотрим пример, где мы запускаем несколько асинхронных операций одновременно и ждем их завершения.
+
+
+const promise1 = new Promise((resolve) => setTimeout(resolve, 100, 'First'));
+const promise2 = new Promise((resolve) => setTimeout(resolve, 200, 'Second'));
+const promise3 = new Promise((resolve) => setTimeout(resolve, 300, 'Third'));
+
+Promise.all([promise1, promise2, promise3])
+  .then((results) => {
+    console.log(results); // ['First', 'Second', 'Third']
+  })
+  .catch((error) => {
+    console.error('One of the promises failed:', error);
+  });
+
+
+  //Если один из промисов отклоняется, Promise.all отклоняет весь результат.
+
+  const promiseone = new Promise((resolve) => setTimeout(resolve, 100, 'First'));
+const promisetwo = new Promise((resolve, reject) => setTimeout(reject, 200, 'Error in Second'));
+const promisethree = new Promise((resolve) => setTimeout(resolve, 300, 'Third'));
+
+Promise.all([promiseone, promisetwo, promisethree])
+  .then((results) => {
+    console.log(results); // This line will not be executed
+  })
+  .catch((error) => {
+    console.error('One of the promises failed:', error); // 'Error in Second'
+  });
+
+
+  //Promise.all также можно использовать с async/await для более удобной работы с асинхронным кодом.
+
+  const promisefirst = new Promise((resolve) => setTimeout(resolve, 100, 'First'));
+const promisesecond = new Promise((resolve) => setTimeout(resolve, 200, 'Second'));
+const promisethird = new Promise((resolve) => setTimeout(resolve, 300, 'Third'));
+
+async function runPromises() {
+  try {
+    const results = await Promise.all([promisefirst, promisesecond, promisethird]);
+    console.log(results); // ['First', 'Second', 'Third']
+  } catch (error) {
+    console.error('One of the promises failed:', error);
+  }
+}
+
+runPromises();
+
+
+//Promise.all принимает массив промисов и возвращает один промис, который выполняется, когда все промисы в массиве выполнены успешно, или отклоняется, если любой из промисов отклонен. Он позволяет обрабатывать несколько асинхронных операций параллельно и возвращает массив результатов всех промисов.
+
+
+
+
