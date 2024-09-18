@@ -2024,3 +2024,120 @@ console.log(bool2); // false
 
 
 24.  
+
+//Существует несколько типов функций, каждая из которых имеет свои особенности и области применения. Вот основные виды функций:
+
+
+//1️⃣Функциональные выражения и объявленные функции
+
+//Объявленные функции (Function Declaration)
+
+//Объявленные с использованием ключевого слова function, идущего перед именем функции. Эти функции "всплывают" (hoisted), что означает, что они могут быть вызваны до их определения в коде.
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet('Alice')); // Hello, Alice!
+
+//Функциональные выражения (Function Expression)
+
+//Не "всплывают" и не могут быть вызваны до их определения.
+const greet = function(name) {
+  returned 
+};
+
+console.log(greet('Bob')); // Hello, Bob!
+
+
+//2️⃣Стрелочные функции (Arrow Functions)
+
+//Это сокращенный синтаксис для создания функций, введенный в ES6. Они не имеют собственного контекста this и не могут быть использованы в качестве методов или конструктора.
+`
+const greet = (name) => Hello, ${name}!;
+
+console.log(greet('Charlie')); // Hello, Charlie!
+
+`
+
+//3️⃣Анонимные функции
+
+//Часто используются в качестве аргументов для других функций или для создания замыканий.
+setTimeout(function() {
+  console.log('This will run after 1 second');
+}, 1000);
+
+
+//4️⃣Функции-конструкторы
+
+//Для создания объектов. Они вызываются с ключевым словом new и обычно имеют заглавную букву в названии.
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+const alice = new Person('Alice', 30);
+console.log(alice.name); // Alice
+
+
+//5️⃣Методы объекта
+
+//Являются свойствами объекта.
+`
+const person = {
+  name: 'Alice',
+  greet: function() {
+    return Hello, my name is ${this.name};
+  }
+};
+
+console.log(person.greet()); // Hello, my name is Alice
+
+`
+
+
+//6️⃣Генераторы (Generators)
+
+//Могут быть приостановлены и возобновлены в любой момент. Они объявляются с помощью function* и используют ключевое слово yield.
+function* generatorFunction() {
+  yield 'First';
+  yield 'Second';
+  yield 'Third';
+}
+
+const gen = generatorFunction();
+console.log(gen.next().value); // First
+console.log(gen.next().value); // Second
+console.log(gen.next().value); // Third
+
+
+//7️⃣Асинхронные функции (Async/Await)
+
+//Возвращают промис и позволяют использовать синтаксис await для упрощения работы с асинхронным кодом.
+async function fetchData() {
+  const response = await fetch('https://api.example.com/data');
+  const data = await response.json();
+  return data;
+}
+
+fetchData().then(data => console.log(data));
+
+
+//8️⃣Функции обратного вызова (Callbacks)
+
+//Передаваемые в качестве аргументов в другие функции и вызываемые позже.
+function fetchData(callback) {
+  setTimeout(() => {
+    const data = { name: 'Alice' };
+    callback(data);
+  }, 1000);
+}
+
+fetchData(function(data) {
+  console.log(data); // { name: 'Alice' }
+});
+
+
+//Есть несколько типов функций, включая объявленные функции, функциональные выражения, стрелочные функции, анонимные функции, функции-конструкторы, методы объекта, генераторы, асинхронные функции и функции обратного вызова. Каждый тип функций имеет свои особенности и области применения.
+
+
+25 
