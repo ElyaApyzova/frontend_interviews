@@ -3078,4 +3078,111 @@ POST:
 //GET используется для получения данных и передает параметры в URL, может кешироваться и имеет ограничение по длине URL. POST используется для отправки данных, передает параметры в теле запроса, не кешируется и не имеет строгих ограничений по длине данных.
 
 
-36. 
+36. //Вопрос из таблицы? 
+
+
+//Запросы к серверу можно писать в различных частях кода в зависимости от архитектуры вашего приложения и используемых технологий. Основное правило — писать серверные запросы там, где это наиболее логично с точки зрения структуры и логики вашего кода. Рассмотрим несколько распространенных подходов и ситуаций.
+
+
+//1️⃣ Клиент-серверные приложения
+
+//Веб-приложения (JavaScript/TypeScript)
+
+
+//Для веб-приложений запросы к серверу обычно выполняются на стороне клиента (в браузере) с использованием JavaScript или TypeScript. Чаще всего это делается с помощью API, таких как fetch или axios.
+
+//Пример с использованием fetch:
+
+
+function fetchData() {
+    fetch('https://api.example.com/data')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+
+//Веб-приложения с использованием библиотек/фреймворков
+
+//Когда вы используете фреймворки, такие как React, Angular или Vue, запросы к серверу обычно выполняются в компонентах или сервисах.
+
+//Пример с использованием React:
+
+
+import React, { useEffect, useState } from 'react';
+
+function MyComponent() {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetch('https://api.example.com/data')
+            .then(response => response.json())
+            .then(data => setData(data))
+            .catch(error => console.error('Error:', error));
+    }, []);
+
+    return (
+        <div>
+            {data ? <div>Data: {data}</div> : <div>Loading...</div>}
+        </div>
+    );
+}
+
+
+//Мобильные приложения
+
+//Для мобильных приложений, разработанных с использованием таких технологий, как React Native, Swift или Kotlin, запросы к серверу также выполняются в коде приложения.
+
+//Пример с использованием React Native:
+
+
+import React, { useEffect, useState } from 'react';
+import { View, Text } from 'react-native';
+
+function MyComponent() {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetch('https://api.example.com/data')
+            .then(response => response.json())
+            .then(data => setData(data))
+            .catch(error => console.error('Error:', error));
+    }, []);
+
+    return (
+        <View>
+            {data ? <Text>Data: {data}</Text> : <Text>Loading...</Text>}
+        </View>
+    );
+}
+
+
+//2️⃣ Серверные приложения
+
+// Серверные скрипты (Node.js)
+
+//В случае серверных приложений на Node.js запросы к другим серверам могут выполняться для интеграции с внешними API или микросервисами.
+
+//Пример с использованием axios:
+
+const axios = require('axios');
+
+axios.get('https://api.example.com/data')
+    .then(response => {
+        console.log(response.data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+
+    //Заключение
+
+//Запросы к серверу можно писать в различных частях вашего кода в зависимости от архитектуры приложения и используемых технологий. Важно, чтобы запросы выполнялись в логически обоснованных местах, а их логика была хорошо инкапсулирована и легко тестируема.
+
+
+37.
